@@ -21,7 +21,7 @@ router.get('/logout', (req, res)=> {
     res.redirect('/user/login');
 })
 
-//! login
+//! login with  middleware
 router.get('/login', auth.checklogin, (req, res)=>{
     let msg = ''
     if(req.query.msg) {
@@ -49,7 +49,7 @@ router.post('/login', (req, res)=>{
            // check password
            if(data.password!==req.body.password) { //not equal value and type
                 res.render('login', {
-                    msg:'Password doesnot match! Please try again!'
+                    msg:'Password does not match! Please try again!'
                 })
            }
            else {

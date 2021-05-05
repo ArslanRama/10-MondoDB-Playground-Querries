@@ -7,6 +7,7 @@ require('dotenv').config()
 
 const indexRouter = require('./routes/indexRouter');
 const userRouter = require('./routes/userRouter');
+const productRouter = require('./routes/productRouter')
 
 const mongoose = require("mongoose");
 
@@ -57,6 +58,7 @@ app.get('/searchByName', (req, res)=> {
 //! Routes
 app.use('/', indexRouter)
 app.use('/user', userRouter)
+app.use('/product', productRouter)
 
 //! listen app with port
 app.listen(PORT, ()=>{

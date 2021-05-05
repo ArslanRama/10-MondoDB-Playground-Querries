@@ -17,7 +17,8 @@ const userSchema = new Schema({
     gender: String,
     password: String,
     country: String,
-    salary: Number
+    salary: Number,
+    role: String,
 })
 
 // declare Schema as a model
