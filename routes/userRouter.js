@@ -42,7 +42,7 @@ router.post('/login', (req, res)=>{
          */
         if(data==null) {
             res.render('login', {
-                msg:'Email not found! Please try correct one or signup!'
+                msg:'Email not found! Please try again!'
             })
         }
         else {
