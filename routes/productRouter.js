@@ -14,7 +14,7 @@ router.get('/productControl',auth.loginAdmin, (req, res) => {
 
 //! Employees or Admin
 router.get('/productAdd', auth.loginEmployee, (req, res) => {
-    res.send ('Employers can add products')
+    res.send ('Employers or admin can add products')
 })
 
 module.exports = router;

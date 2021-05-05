@@ -12,6 +12,7 @@ exports.permission = (req, res, next) => {
     res.redirect('/user/login');
 }
 
+//! Admin Login
 exports.loginAdmin = (req, res, next) => {
 
     // get data from user 
@@ -23,11 +24,12 @@ exports.loginAdmin = (req, res, next) => {
   
 }
 
+//! Employees / Admin Login
 exports.loginEmployee = (req, res, next) => {
 
     // get data from user 
     const role = 'employee'
-    if (role === 'employee'){
+    if (role === 'employee' || role === 'admin'){
         return next();
     }
     res.send('employee or admin permission required');
