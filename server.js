@@ -9,6 +9,12 @@ const indexRouter = require('./routes/indexRouter');
 const userRouter = require('./routes/userRouter');
 const productRouter = require('./routes/productRouter')
 
+//! Helper
+const hbs = require('hbs');
+hbs.registerHelper('capital',(username)=>{
+    return username.toUpperCase() + ' Rama'
+})
+
 const mongoose = require("mongoose");
 
 const PORT = process.env.PORT || 3000;
@@ -65,7 +71,7 @@ Error Router Handler
 only runs when no other routes match
 we add "*" to the pathname because it means any route
 */
-
+//? catch 404 and forward to error handler
 app.get('*', (req, res) => {
     res.render('error')
 })
