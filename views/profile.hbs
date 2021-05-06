@@ -1,10 +1,16 @@
 <h2>User data:</h2>
 {{#if user}}
  <h3>User Name:
-     {{capital user.name}}
+     {{capital user.name}}  
  </h3>
+ <h4>
+     5 x 100:
+     {{multi100 '5'}}
+ </h4>
 {{/if}}
 <a href="/user/logout">Logout</a>
+
 {{#ifEqual user.gender 'male'}}
 <h1>User is a Male</h1>
 {{/ifEqual}}
+

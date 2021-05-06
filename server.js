@@ -11,18 +11,25 @@ const productRouter = require('./routes/productRouter')
 
 //! Helper
 const hbs = require('hbs');
+// toUpperCase Helper
 hbs.registerHelper('capital', (username) => {
     return username.toUpperCase() + ' Rama'
 })
 
+// ifEqual Helper
 hbs.registerHelper('ifEqual', (arg1, arg2, option) => {
     (arg1 == arg2) ? option.fn(this) : option.inverse(this)
     //    if(arg1 == arg2) {
-//        return option.fn(this)
-//    }
-//    else {
-//        return option.inverse(this)
-//    }
+    //        return option.fn(this)
+    //    }
+    //    else {
+    //        return option.inverse(this)
+    //    }
+})
+
+// multiply Helper
+hbs.registerHelper('multi100', (price)=>{
+    return price*100;
 })
 
 
