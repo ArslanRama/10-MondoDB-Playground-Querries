@@ -15,16 +15,16 @@ const PORT = process.env.PORT || 3000;
 
 //! database name and url
 const DB_NAME = process.env.DB_NAME
-const DB_URL = process.env.MongoDB_Link+DB_NAME
+const DB_URL = process.env.MongoDB_Link + DB_NAME
 mongoose.connect(DB_URL, {
     useUnifiedTopology: true,
     useNewUrlParser: true
 })
-.then(()=> console.log('MongoDB database is successfully connected'))
-.catch(()=> console.log('Database connection failed!'))
+    .then(() => console.log('MongoDB database is successfully connected'))
+    .catch(() => console.log('Database connection failed!'))
 
 //! Settings
-app.use(express.static(__dirname+'/public'))
+app.use(express.static(__dirname + '/public'))
 app.set('view engine', 'hbs');
 
 app.use(express.urlencoded({
@@ -35,10 +35,10 @@ app.use(express.urlencoded({
 //! express session setting
 app.use(session({
     secret: process.env.SECRET, // signature
-    resave:false,
+    resave: false,
     saveUninitialized: true,
     cookie: { // set the time for session data
-        maxAge: 1000*60*60 // its in miliseconds 1000ms = 1s
+        maxAge: 1000 * 60 * 60 // its in miliseconds 1000ms = 1s
     }
 }));
 console.log(session)
@@ -46,11 +46,11 @@ console.log(session)
 //! Model
 const User = require('./models/User')
 // test mongoose query methods
-app.get('/searchByName', (req, res)=> {
+app.get('/searchByName', (req, res) => {
     //res.json('test ok') // check route test ok
     // req.body.name
-    User.findOne({name:"Jack"}, (err, data)=>{
-        if(err) throw err;
+    User.findOne({ name: "Jack" }, (err, data) => {
+        if (err) throw err;
         res.json(data)
     })
 })
@@ -60,8 +60,18 @@ app.use('/', indexRouter)
 app.use('/user', userRouter)
 app.use('/product', productRouter)
 
+/* 
+Error Router Handler
+only runs when no other routes match
+we add "*" to the pathname because it means any route
+*/
+
+app.get('*', (req, res) => {
+    res.render('error')
+})
+
 //! listen app with port
-app.listen(PORT, ()=>{
+app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`)
 })
 
