@@ -1,8 +1,10 @@
-<h1>Profile</h1>
 <h2>User data:</h2>
 {{#if user}}
- <h3> {{ capital user.name}}</h3>
+ <h3>User Name:
+     {{capital user.name}}
+ </h3>
 {{/if}}
 <a href="/user/logout">Logout</a>
-
-
+{{#ifEqual user.gender 'male'}}
+<h1>User is a Male</h1>
+{{/ifEqual}}

@@ -11,9 +11,20 @@ const productRouter = require('./routes/productRouter')
 
 //! Helper
 const hbs = require('hbs');
-hbs.registerHelper('capital',(username)=>{
+hbs.registerHelper('capital', (username) => {
     return username.toUpperCase() + ' Rama'
 })
+
+hbs.registerHelper('ifEqual', (arg1, arg2, option) => {
+    (arg1 == arg2) ? option.fn(this) : option.inverse(this)
+    //    if(arg1 == arg2) {
+//        return option.fn(this)
+//    }
+//    else {
+//        return option.inverse(this)
+//    }
+})
+
 
 const mongoose = require("mongoose");
 
@@ -50,7 +61,8 @@ app.use(session({
 console.log(session)
 
 //! Model
-const User = require('./models/User')
+const User = require('./models/User');
+const { options } = require('./routes/indexRouter');
 // test mongoose query methods
 app.get('/searchByName', (req, res) => {
     //res.json('test ok') // check route test ok
