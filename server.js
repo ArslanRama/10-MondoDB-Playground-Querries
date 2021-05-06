@@ -9,7 +9,7 @@ const indexRouter = require('./routes/indexRouter');
 const userRouter = require('./routes/userRouter');
 const productRouter = require('./routes/productRouter')
 
-//! Helper
+//! Custom Helper
 const hbs = require('hbs');
 // toUpperCase Helper
 hbs.registerHelper('capital', (username) => {

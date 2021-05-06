@@ -1,0 +1,29 @@
+<h1>Index hbs file</h1>
+<h2>Website Name: {{big website}}</h2>
+<h2>User Data: way 1</h2>
+<h3>Name: {{big user.name}}</h3>
+<h3>country: {{big user.country}}</h3>
+
+<h2>User Data: way 2</h2>
+{{#with user}}
+<h3>Name: {{small name}}</h3>
+<h3>country: {{small country}}</h3>
+{{/with}}
+
+<h2>Fruits</h2>
+<ul>
+{{#each fruits}}
+<li>{{this}}</li>
+{{/each}}
+</ul>
+
+<h2>Products of array objects</h2>
+{{#each products}}
+<h3>Name of Prodcuts: {{name}} and Price: {{multi100 price}}</h3>
+{{/each}}
+
+{{#if author}}
+<h1>There is a author</h1>
+
+<h1>No author</h1>
+{{/if}}
