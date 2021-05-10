@@ -101,7 +101,7 @@ app.get('/uploadForm', (req, res) => {
 })
 // test file upload process
 app.post('/uploads/file', upload.single('profile_pic'), (req, res) => {
-    console.log('data from form: ', req.file)
+    console.log('data from form: ', req.file.fileName)
 })
 
 //! Test Faker.js Router
