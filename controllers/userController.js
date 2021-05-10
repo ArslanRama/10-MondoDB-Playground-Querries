@@ -1,39 +1,49 @@
-const axios = require('axios')
-// GET all users from api
-exports.getUsers = (req, res)=> {
-    axios.get('https://jsonplaceholder.typicode.com/users')
-    .then(result=> {
-        res.render('userList', {
-            users: result.data
-        })
-    })
-}
+const path = require("path");
 
-// GET 1 User from api
-exports.getOneUser=(req, res)=>{
-    axios.get('https://jsonplaceholder.typicode.com/users/9')
-    .then((result)=>{
-        //console.log(result.data)
-        res.render('profile', {user: result.data}); 
-    })
-}
+const home = (req, res) => {
+  return res.sendFile(path.join(`${__dirname}/views/fake_profile.hbs`));
+};
 
-// Delete user
-exports.deleteUser = (req, res)=> {
-    res.send('User removed...')
-}
+module.exports = {
+  getHome: home
+};
 
-// add a picture to user
-exports.addPicture = (req, res)=> {
-    res.send('User add a new picture...')
-}
+// const axios = require('axios')
+// // GET all users from api
+// exports.getUsers = (req, res)=> {
+//     axios.get('https://jsonplaceholder.typicode.com/users')
+//     .then(result=> {
+//         res.render('userList', {
+//             users: result.data
+//         })
+//     })
+// }
 
-// test route
-exports.testRoute = (req, res)=> {
-    res.send('Test /user/data/anyid/test')
-}
+// // GET 1 User from api
+// exports.getOneUser=(req, res)=>{
+//     axios.get('https://jsonplaceholder.typicode.com/users/9')
+//     .then((result)=>{
+//         //console.log(result.data)
+//         res.render('profile', {user: result.data}); 
+//     })
+// }
 
-// Get User Details by Id
-exports.getUserById = (req, res)=> {
-    res.send('User Detail')
-}
+// // Delete user
+// exports.deleteUser = (req, res)=> {
+//     res.send('User removed...')
+// }
+
+// // add a picture to user
+// exports.addPicture = (req, res)=> {
+//     res.send('User add a new picture...')
+// }
+
+// // test route
+// exports.testRoute = (req, res)=> {
+//     res.send('Test /user/data/anyid/test')
+// }
+
+// // Get User Details by Id
+// exports.getUserById = (req, res)=> {
+//     res.send('User Detail')
+// }

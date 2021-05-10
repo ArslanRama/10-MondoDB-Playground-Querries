@@ -50,7 +50,7 @@ hbs.registerHelper('multi100', (price) => {
 
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 
 //! database name and url
 const DB_NAME = process.env.DB_NAME
