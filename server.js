@@ -28,8 +28,8 @@ hbs.registerHelper('ifEqual', (arg1, arg2, option) => {
 })
 
 // multiply Helper
-hbs.registerHelper('multi100', (price)=>{
-    return price*100;
+hbs.registerHelper('multi100', (price) => {
+    return price * 100;
 })
 
 
@@ -86,15 +86,21 @@ app.get('/searchByName', (req, res) => {
 // 3- display the data in browser
 
 const faker = require('faker');
-app.get('/test/fakeData', (req, res)=>{
+app.get('/test/fakeData', (req, res) => {
     const userData = {
+        avatar: faker.image.avatar(),
         name: {
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
+            jobTitle: faker.name.jobTitle(),
+            jobArea: faker.name.jobArea(),
         },
-        profile_pic: faker.image.avatar()
+        phone: faker.phone.phoneNumberFormat(),
+
     }
-    res.json(userData)
+    // res.json(`Employee: ${userData.name.firstName} ${userData.name.lastName}`);
+    //  res.json(userData)
+    res.render('fake_profile', { user: userData })
 })
 
 //! Routes
