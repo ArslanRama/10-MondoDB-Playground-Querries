@@ -1,4 +1,4 @@
-# 10-Querries
+# MongoDB Playground
 
 # Installation
 
@@ -9,3 +9,15 @@
 # API
 
 - const session = require('express-session')
+- 
+# Modules and Packages
+    - bcrypt
+    - dotenv
+    - express
+    - express-handlebars
+    - express-session
+    - faker
+    - hbs
+    - mongodb
+    - mongoose
+    - multer
