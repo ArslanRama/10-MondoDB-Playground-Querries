@@ -22,7 +22,9 @@ router.get('/signup', (req, res) => {
 //! create an account 
 router.post('/signup', (req, res) => {
     const userPassword = req.body.password;
+    //!  syncronized hasspassword
     const saltRound = 10;
+    // encrpting as async way
     bcrypt.hash(userPassword, saltRound, (err, hashPassword) => {
         req.body.password = hashPassword;
         const newUser = new User(req.body);
@@ -31,9 +33,11 @@ router.post('/signup', (req, res) => {
             res.json(doc)
         })
     })
-
-
 })
+
+
+
+
 
 //! logout
 router.get('/logout', (req, res) => {

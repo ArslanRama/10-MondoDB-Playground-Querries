@@ -80,6 +80,23 @@ app.get('/searchByName', (req, res) => {
     })
 })
 
+//! Test Faker.js Router
+// 1- get the fake data from faker.js addPicture
+// 2-  see the date in console
+// 3- display the data in browser
+
+const faker = require('faker');
+app.get('/test/fakeData', (req, res)=>{
+    const userData = {
+        name: {
+            firstName: faker.name.firstName(),
+            lastName: faker.name.lastName(),
+        },
+        profile_pic: faker.image.avatar()
+    }
+    res.json(userData)
+})
+
 //! Routes
 app.use('/', indexRouter)
 app.use('/user', userRouter)
