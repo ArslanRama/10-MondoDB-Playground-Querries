@@ -9,6 +9,9 @@ const indexRouter = require('./routes/indexRouter');
 const userRouter = require('./routes/userRouter');
 const productRouter = require('./routes/productRouter')
 
+//! Multer
+const multer = require('multer');
+
 //! Custom Helper
 const hbs = require('hbs');
 // toUpperCase Helper
@@ -78,6 +81,15 @@ app.get('/searchByName', (req, res) => {
         if (err) throw err;
         res.json(data)
     })
+})
+
+//! File Upload Testing
+app.get('/uploadForm', (req, res)=>{
+    res.render('fileForm')
+})
+// test file upload process
+app.post('/upload/file', (req, res)=>{
+    console.log('data from form: ', req.file)
 })
 
 //! Test Faker.js Router
