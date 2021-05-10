@@ -11,6 +11,18 @@ const productRouter = require('./routes/productRouter')
 
 //! Multer
 const multer = require('multer');
+// make a Disk Store 
+// The disk storage engine gives you full control on storing files to disk.
+const storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, 'public/uploads/images')
+    },
+    filename: function (req, file, callback) {
+        callback(null, Date.now() + file.originalname)
+    }
+})
+const upload = multer({ storage })
+
 
 //! Custom Helper
 const hbs = require('hbs');
@@ -84,11 +96,11 @@ app.get('/searchByName', (req, res) => {
 })
 
 //! File Upload Testing
-app.get('/uploadForm', (req, res)=>{
+app.get('/uploadForm', (req, res) => {
     res.render('fileForm')
 })
 // test file upload process
-app.post('/upload/file', (req, res)=>{
+app.post('/uploads/file', upload.single('profile_pic'), (req, res) => {
     console.log('data from form: ', req.file)
 })
 
