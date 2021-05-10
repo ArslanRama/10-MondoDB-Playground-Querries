@@ -1,6 +1,6 @@
 # MongoDB Playground Exercise
 
-* How to use Admin/User accounts for:
+- How to use Admin/User accounts for:
 *** Sign Up 
 *** Log In
 *** Upload Pictures of Different Formats
