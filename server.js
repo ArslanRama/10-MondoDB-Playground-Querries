@@ -9,6 +9,10 @@ const indexRouter = require('./routes/indexRouter');
 const userRouter = require('./routes/userRouter');
 const productRouter = require('./routes/productRouter')
 
+const auth = require('./config/auth')
+//! Model
+const User = require('./models/User');
+
 //! Multer
 const multer = require('multer');
 // make a Disk Store 
@@ -31,20 +35,15 @@ hbs.registerHelper('capital', (username) => {
     return username.toUpperCase() + ' Rama'
 })
 
-// ifEqual Helper
+// if helper
 hbs.registerHelper('ifEqual', (arg1, arg2, option) => {
-    (arg1 == arg2) ? option.fn(this) : option.inverse(this)
+    return (arg1 == arg2) ? option.fn(this) : option.inverse(this)
     //    if(arg1 == arg2) {
-    //        return option.fn(this)
+    //        return option.fn(this) 
     //    }
     //    else {
     //        return option.inverse(this)
     //    }
-})
-
-// multiply Helper
-hbs.registerHelper('multi100', (price) => {
-    return price * 100;
 })
 
 
@@ -82,38 +81,29 @@ app.use(session({
 }));
 console.log(session)
 
-//! Model
-const User = require('./models/User');
-const { options } = require('./routes/indexRouter');
-// test mongoose query methods
-app.get('/searchByName', (req, res) => {
-    //res.json('test ok') // check route test ok
-    // req.body.name
-    User.findOne({ name: "Jack" }, (err, data) => {
-        if (err) throw err;
-        res.json(data)
-    })
-})
 
 //! File Upload Testing
 app.get('/uploadForm', (req, res) => {
     res.render('fileForm')
 })
-// test file upload process
-app.post('/uploads/file', upload.single('profile_pic'), (req, res) => {
-    console.log('data source:', req.file.filename)
 
-    // display images
-    // res.render('profile', {
-    //     picture: req.file
-    // } )
-    //! save picture to the database
-    const newUserPicture = new User({
-        uploadPic: req.file.filename
-    })
-    newUserPicture.save((err, doc) => {
-        res.json(doc)
-    })
+// test file upload process
+app.post('/uploads/file', auth.permission, upload.single('images'), (req, res) => {
+    console.log('data coming from: ', req.file)
+    if (req.file.mimetype === ('image/jpeg' || 'image/png' || 'image/jpg')) {
+        console.log(req.session.user._id)
+        const userId = req.session.user._id;
+        User.findByIdAndUpdate(userId, {
+            images: req.file.filename,
+            country: 'Germany'
+        }, (err, doc) => {
+            console.log(doc)
+            res.redirect('/user/profile'); // another path or route
+        })
+    }
+    else {
+        res.send('This is not an image! Try an image')
+    }
 })
 
 //! Test Faker.js Router
@@ -137,6 +127,16 @@ app.get('/test/fakeData', (req, res) => {
     // res.json(`Employee: ${userData.name.firstName} ${userData.name.lastName}`);
     //  res.json(userData)
     res.render('fake_profile', { user: userData })
+})
+
+// test mongoose query methods
+app.get('/searchByName', (req, res) => {
+    //res.json('test ok') // check route test ok
+    // req.body.name
+    User.findOne({ name: "Jack" }, (err, data) => {
+        if (err) throw err;
+        res.json(data)
+    })
 })
 
 //! Routes

@@ -5,8 +5,11 @@ const auth = require('../config/auth')
 const bcrypt = require('bcrypt')
 
 router.get('/profile', auth.permission, (req, res) => {
-    res.render('profile', {
-        user: req.session.user
+    const userId=req.session.user._id;
+    User.findById(userId,(err, user) => {
+        res.render('profile', {
+            user
+        })
     })
 })
 
@@ -74,7 +77,7 @@ router.post('/login', (req, res) => {
             // find the userGiven password, not the hash
             bcrypt.compare(req.body.password, data.password, (err, result) => {
                 if (result){
-                    req.session.user=daya;
+                    req.session.user=data;
                     res.redirect('/user/profile')
                 } else
                 res.render('login', {
