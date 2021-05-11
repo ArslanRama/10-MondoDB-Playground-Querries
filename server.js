@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
         callback(null, 'public/uploads/images')
     },
     filename: function (req, file, callback) {
-        callback(null, Date.now() + file.originalname)
+        callback(null, Date.now() + '_profile_' + file.originalname)
     }
 })
 const upload = multer({ storage })
@@ -101,7 +101,19 @@ app.get('/uploadForm', (req, res) => {
 })
 // test file upload process
 app.post('/uploads/file', upload.single('profile_pic'), (req, res) => {
-    console.log('data from form: ', req.file.fileName)
+    console.log('data source:', req.file.filename)
+
+    // display images
+    // res.render('profile', {
+    //     picture: req.file
+    // } )
+    //! save picture to the database
+    const newUserPicture = new User({
+        uploadPic: req.file.filename
+    })
+    newUserPicture.save((err, doc) => {
+        res.json(doc)
+    })
 })
 
 //! Test Faker.js Router
