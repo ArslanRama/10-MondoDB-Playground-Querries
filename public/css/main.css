@@ -1,6 +1,7 @@
 body {
     background-color: burlywood;
-    color: tomato;
+    color: rgb(24, 22, 21);
+    text-align: center;
 }
 ul li {
     color: white;
@@ -8,4 +9,9 @@ ul li {
 }
 .img-test {
     border-radius: 50%;
+}
+form {
+    border: 1px solid black;
+    background-color: white;
+    
 }
