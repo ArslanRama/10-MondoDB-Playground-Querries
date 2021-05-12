@@ -1,14 +1,10 @@
-<img src="/uploads/images/{{user.images}} " width="50%" alt="">
-{{#if user}}
- <h3>User Name:
-     {{capital user.name}}  
- </h3>
+{{#if all_pics}}
+{{#each all_pics}}
+  <div class="card" style="width: 18rem;">
+     <img src="/uploads/images/{{filename}}" class="card-img-top" alt="...">
+  </div>
+{{/each}}
 {{/if}}
-<a href="/user/logout">Logout</a>
-
-{{#ifEqual user.gender 'male'}}
-<h1>User is a Male</h1>
-{{/ifEqual}}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,20 +32,20 @@
 
           <form
             class="mt-4"
-            action="/uploads/file"
+            action="/uploads/many"
             method="POST"
             enctype="multipart/form-data"
           >
             <div class="form-group">
               <input
                 type="file"
-                name="images"
+                name="pictures"
                 multiple
                 id="input-files"
                 class="form-control-file border"
               />
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Upload All</button>
           </form>
         </div>
       </div>

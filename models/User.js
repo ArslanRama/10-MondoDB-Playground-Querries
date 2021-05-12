@@ -19,6 +19,7 @@ const userSchema = new Schema({
     country: String,
     salary: Number,
     images: String,
+    gallery: [{}]
 })
 
 // declare Schema as a model

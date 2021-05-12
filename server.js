@@ -106,6 +106,27 @@ app.post('/uploads/file', auth.permission, upload.single('images'), (req, res) =
     }
 })
 
+//! upload many pictures at a time
+app.get('/uploads/many', (req, res)=> {
+    const userId = req.session.user._id;
+    User.findById(userId, (err, user)=> {
+        res.render('gallery',{all_pics: user.gallery})
+    })
+})
+app.post('/uploads/many', upload.array('pictures'),(req, res)=>{
+    console.log(req.files)
+    const all_pics = req.files; // array of picture objects
+    const userId = req.session.user._id;
+    /**
+     * 1. check if user has something in gallery
+     * 2. add old data + new data (e.g push())
+     * 3. update the gallery with new array
+     */
+    User.findByIdAndUpdate(userId, {gallery: all_pics}, (err, user)=>{
+        res.redirect('/uploads/many');
+    })   
+})
+
 //! Test Faker.js Router
 // 1- get the fake data from faker.js addPicture
 // 2-  see the date in console
